@@ -169,15 +169,17 @@ O projeto conta com suíte integrada unificada executada via `pytest`, cobrindo 
 pytest
 ```
 
-Você também pode executar individualmente as suítes modulares por fase:
+Você também pode executar classes de testes específicas por módulo:
 
 ```bash
-python test_phase3.py  # Criptografia em repouso, TTL e LGPD Art. 18
-python test_phase4.py  # Rate limiting, CSRF, validação de payload e Retry-After
-python test_phase5.py  # CSP, headers defensivos e prevenção DOM-XSS
-python test_phase6.py  # Privacidade, termos e conformidade Spotify
-python test_phase7.py  # Infraestrutura, deploy, audit e CI/CD
-python test_phase8.py  # Governança, STRIDE threat model e resposta a incidentes
+pytest tests/test_security.py -k TestEnvironmentAndSecrets        # Fail-fast e segredos
+pytest tests/test_security.py -k TestOAuthAndSession             # OAuth 2.0 PKCE e logout
+pytest tests/test_security.py -k TestEncryptionAndLGPD           # Criptografia e LGPD Art. 18
+pytest tests/test_security.py -k TestAPISecurityAndRateLimiting  # Limiter, CSRF e payload
+pytest tests/test_security.py -k TestFrontendAndHeaders          # CSP e anti-DOM-XSS
+pytest tests/test_security.py -k TestPrivacyAndCompliance        # Termos e conformidade Spotify
+pytest tests/test_security.py -k TestInfrastructureAndDeployment # Gunicorn e audit
+pytest tests/test_security.py -k TestGovernanceAndThreatModel    # STRIDE e runbooks
 ```
 
 ---

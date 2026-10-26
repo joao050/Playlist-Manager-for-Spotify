@@ -37,13 +37,7 @@ jobs:
           SPOTIPY_CLIENT_ID: "mock_client_id_for_testing_purposes"
           SPOTIPY_CLIENT_SECRET: "mock_client_secret_for_testing_purposes"
           SPOTIPY_REDIRECT_URI: "http://127.0.0.1:5000/callback"
-          ENCRYPTION_KEY: "ZkFBQUFBQm15ZkJxS25wMHh5UFRyMVRrZExhNkN5TmhMdz0="
+          ENCRYPTION_KEY: "MDEyMzQ1Njc4OTAxMjM0NTY3ODkwMTIzNDU2Nzg5MDE="
           FLASK_ENV: "development"
         run: |
           python -m pytest
-          python test_phase3.py
-          python test_phase4.py
-          python test_phase5.py
-          python test_phase6.py
-          python test_phase7.py
-          python test_phase8.py

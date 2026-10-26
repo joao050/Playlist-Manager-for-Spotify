@@ -6,6 +6,21 @@ import pytest
 # Assegura que o diretório raiz esteja no sys.path
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
 
+# Injeta variáveis de ambiente padrão para testes automatizados
+os.environ.setdefault("SPOTIPY_CLIENT_ID", "mock_client_id_for_testing_purposes")
+os.environ.setdefault("SPOTIPY_CLIENT_SECRET", "mock_client_secret_for_testing_purposes")
+os.environ.setdefault("SPOTIPY_REDIRECT_URI", "http://127.0.0.1:5000/callback")
+os.environ.setdefault("FLASK_SECRET_KEY", "0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef")
+os.environ.setdefault("FLASK_ENV", "development")
+
+# Chave Fernet mock válida (32 bytes em Base64 URL-safe) para testes
+VALID_TEST_FERNET_KEY = "MDEyMzQ1Njc4OTAxMjM0NTY3ODkwMTIzNDU2Nzg5MDE="
+from cryptography.fernet import Fernet
+try:
+    Fernet(os.environ.get("ENCRYPTION_KEY", "").encode())
+except Exception:
+    os.environ["ENCRYPTION_KEY"] = VALID_TEST_FERNET_KEY
+
 import app as spotify_app
 
 @pytest.fixture(scope="session")
