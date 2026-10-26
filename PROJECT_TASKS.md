@@ -30,6 +30,7 @@
 - [x] `#DEP-01` | 2026-10-26 | Atualização de dependências auditadas pelo Dependabot: gunicorn para 26.2.0, actions/checkout para v7 e actions/setup-python para v7 | `requirements.txt`, `.github/workflows/audit.yml`
 - [x] `#DEP-02` | 2026-10-26 | Guia de provisionamento e deploy em produção no Render via Blueprint com render.yaml e sincronização de credenciais | `render.yaml`, `Procfile`, `README.md`
 - [x] `#FIX-REDIS-01` | 2026-10-26 | Resiliência defensiva de inicialização do Redis: validação de esquemas (redis://, rediss://, unix://), fallback seguro para filesystem e remoção de REDIS_URL obrigatório do render.yaml | `app.py`, `render.yaml`
+- [x] `#FIX-REDIS-02` | 2026-10-26 | Definição global de REDIS_URL para consumo consistente pelo Flask-Limiter e Session, eliminando NameError no Gunicorn | `app.py`
 
 
 ## 5. Decisões Tomadas

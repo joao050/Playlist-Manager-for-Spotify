@@ -91,21 +91,24 @@ app.config["PERMANENT_SESSION_LIFETIME"]    = timedelta(hours=24)  # Sessão exp
 # Armazenamento de sessão: Redis se configurado com URL válida, senão filesystem
 raw_redis_url = (os.environ.get("REDIS_URL") or "").strip()
 VALID_REDIS_SCHEMES = ("redis://", "rediss://", "unix://")
+REDIS_URL = raw_redis_url if (raw_redis_url and any(raw_redis_url.startswith(scheme) for scheme in VALID_REDIS_SCHEMES)) else None
 
-if raw_redis_url and any(raw_redis_url.startswith(scheme) for scheme in VALID_REDIS_SCHEMES):
+if REDIS_URL:
     try:
         import redis
         app.config["SESSION_TYPE"] = "redis"
-        app.config["SESSION_REDIS"] = redis.from_url(raw_redis_url)
+        app.config["SESSION_REDIS"] = redis.from_url(REDIS_URL)
     except Exception as e:
         app.logger.warning("Falha ao conectar no Redis (%s). Recorrendo a sessões em filesystem.", e)
         app.config["SESSION_TYPE"] = "filesystem"
         app.config["SESSION_FILE_DIR"] = os.path.join(os.path.dirname(os.path.abspath(__file__)), ".flask_session")
         app.config["SESSION_FILE_THRESHOLD"] = 100
+        REDIS_URL = None
 else:
     app.config["SESSION_TYPE"] = "filesystem"
     app.config["SESSION_FILE_DIR"] = os.path.join(os.path.dirname(os.path.abspath(__file__)), ".flask_session")
     app.config["SESSION_FILE_THRESHOLD"] = 100   # Mantém no máximo 100 arquivos no disco
+Session(app)   # Mantém no máximo 100 arquivos no disco
 Session(app)
 
 # Configuração de Proxy Reverso confiável em produção (ex: Render, Gunicorn + Nginx)
