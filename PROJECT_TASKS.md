@@ -28,6 +28,8 @@
 - [x] `#BRAND-01` | 2026-10-26 | Adequação de marca para "Playlist Manager for Spotify" em conformidade com as Spotify Developer Branding Guidelines antes da publicação no GitHub | `templates/`, `static/js/app.js`, `app.py`, `render.yaml`, `.env.example`, `docs`
 - [x] `#CI-01` | 2026-10-26 | Correção de variáveis de teste no CI/CD e conftest: chave Fernet válida (32 bytes url-safe), injeção padrão de envs de teste no conftest e remoção de scripts legados do workflow | `tests/conftest.py`, `.github/workflows/audit.yml`, `README.md`
 - [x] `#DEP-01` | 2026-10-26 | Atualização de dependências auditadas pelo Dependabot: gunicorn para 26.2.0, actions/checkout para v7 e actions/setup-python para v7 | `requirements.txt`, `.github/workflows/audit.yml`
+- [x] `#DEP-02` | 2026-10-26 | Guia de provisionamento e deploy em produção no Render via Blueprint com render.yaml e sincronização de credenciais | `render.yaml`, `Procfile`, `README.md`
+- [x] `#FIX-REDIS-01` | 2026-10-26 | Resiliência defensiva de inicialização do Redis: validação de esquemas (redis://, rediss://, unix://), fallback seguro para filesystem e remoção de REDIS_URL obrigatório do render.yaml | `app.py`, `render.yaml`
 
 
 ## 5. Decisões Tomadas
@@ -46,3 +48,4 @@
 - Conformidade Estrita com Diretrizes de Marca do Spotify: Adoção do padrão oficial "[Nome do App] for Spotify" ("Playlist Manager for Spotify"), garantindo que o app não aparente ser um produto oficial operado pelo Spotify AB.
 - Isolamento e Resiliência de Testes no CI: `conftest.py` define programaticamente fallbacks de credenciais e chaves Fernet válidas para testes, impedindo que runners limpos (sem `.env` local) falhem no fail-fast do `app.py`.
 - Atualização e Alinhamento Proativo com Dependabot: Adoção do Gunicorn 26.2.0 (melhorias em HTTP/2 e gthread) e actions oficiais v7 (prevenção contra ataques pwn em checkout e runtime Node moderno em setup-python).
+- Fallback Automático e Opcionalidade do Redis: Se a variável `REDIS_URL` estiver vazia, indefinida ou com formato inválido, a aplicação recorre automaticamente ao armazenamento de sessões em sistema de arquivos local (`.flask_session/`), eliminando travamentos de deploy.

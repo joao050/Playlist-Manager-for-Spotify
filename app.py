@@ -88,12 +88,20 @@ app.config["SESSION_COOKIE_HTTPONLY"]       = True
 app.config["SESSION_PERMANENT"]             = True
 app.config["PERMANENT_SESSION_LIFETIME"]    = timedelta(hours=24)  # Sessão expira em 24h
 
-# Armazenamento de sessão: Redis se configurado (ideal para produção multi-instância), senão filesystem
-REDIS_URL = os.environ.get("REDIS_URL")
-if REDIS_URL:
-    import redis
-    app.config["SESSION_TYPE"] = "redis"
-    app.config["SESSION_REDIS"] = redis.from_url(REDIS_URL)
+# Armazenamento de sessão: Redis se configurado com URL válida, senão filesystem
+raw_redis_url = (os.environ.get("REDIS_URL") or "").strip()
+VALID_REDIS_SCHEMES = ("redis://", "rediss://", "unix://")
+
+if raw_redis_url and any(raw_redis_url.startswith(scheme) for scheme in VALID_REDIS_SCHEMES):
+    try:
+        import redis
+        app.config["SESSION_TYPE"] = "redis"
+        app.config["SESSION_REDIS"] = redis.from_url(raw_redis_url)
+    except Exception as e:
+        app.logger.warning("Falha ao conectar no Redis (%s). Recorrendo a sessões em filesystem.", e)
+        app.config["SESSION_TYPE"] = "filesystem"
+        app.config["SESSION_FILE_DIR"] = os.path.join(os.path.dirname(os.path.abspath(__file__)), ".flask_session")
+        app.config["SESSION_FILE_THRESHOLD"] = 100
 else:
     app.config["SESSION_TYPE"] = "filesystem"
     app.config["SESSION_FILE_DIR"] = os.path.join(os.path.dirname(os.path.abspath(__file__)), ".flask_session")
