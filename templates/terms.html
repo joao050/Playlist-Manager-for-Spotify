@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Playlist Manager for Spotify · Termos de Uso</title>
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    body { background-color: #121212; color: #fff; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; }
+  </style>
+</head>
+<body class="min-h-screen py-10 px-4 flex flex-col justify-between">
+  <div class="max-w-3xl mx-auto w-full bg-[#181818] border border-[#282828] rounded-2xl p-6 md:p-10 shadow-2xl space-y-8">
+    
+    <!-- HEADER -->
+    <div class="flex items-center justify-between border-b border-[#282828] pb-6">
+      <div class="flex items-center gap-3">
+        <div class="w-12 h-12 rounded-full bg-[#1DB954] flex items-center justify-center text-black text-2xl font-bold shadow-lg">
+          <i class="fa-brands fa-spotify"></i>
+        </div>
+        <div>
+          <h1 class="text-xl md:text-2xl font-black tracking-tight text-white">Termos de Uso</h1>
+          <p class="text-xs text-neutral-400">Playlist Manager for Spotify · Regras de Utilização do Serviço</p>
+        </div>
+      </div>
+      <a href="/login-page" class="text-xs bg-neutral-800 hover:bg-neutral-700 text-neutral-300 hover:text-white px-3 py-1.5 rounded-lg border border-neutral-700 transition">
+        Voltar
+      </a>
+    </div>
+
+    <!-- CONTEÚDO -->
+    <div class="space-y-6 text-sm text-neutral-300 leading-relaxed">
+      
+      <section class="space-y-2">
+        <h2 class="text-base font-bold text-white flex items-center gap-2">
+          <i class="fa-solid fa-file-contract text-[#1DB954]"></i> 1. Aceitação dos Termos
+        </h2>
+        <p>
+          Ao acessar e utilizar o <strong>Playlist Manager for Spotify</strong>, você declara ter lido, compreendido e concordado com estes Termos de Uso e com a nossa <a href="/privacy" class="text-[#1DB954] hover:underline">Política de Privacidade</a>. Caso não concorde com algum dos termos, descontinue o uso da aplicação imediatamente.
+        </p>
+      </section>
+
+      <section class="space-y-2">
+        <h2 class="text-base font-bold text-white flex items-center gap-2">
+          <i class="fa-solid fa-sliders text-[#1DB954]"></i> 2. Descrição e Finalidade do Serviço
+        </h2>
+        <p>
+          O aplicativo fornece uma interface web para que usuários do Spotify possam consultar suas músicas curtidas, aplicar filtros analíticos (como década, artista, ano e popularidade) e criar novas playlists diretamente em suas contas cadastradas na plataforma Spotify.
+        </p>
+      </section>
+
+      <section class="space-y-2">
+        <h2 class="text-base font-bold text-white flex items-center gap-2">
+          <i class="fa-solid fa-user-check text-[#1DB954]"></i> 3. Requisitos e Autorização OAuth
+        </h2>
+        <p>
+          Para usufruir dos recursos da ferramenta, é indispensável possuir uma conta ativa no Spotify e conceder as permissões necessárias durante o fluxo de autorização OAuth 2.0 oficial. A autenticação ocorre diretamente nos servidores do Spotify; nosso serviço não recebe nem armazena credenciais de acesso (usuário e senha).
+        </p>
+      </section>
+
+      <section class="space-y-2">
+        <h2 class="text-base font-bold text-white flex items-center gap-2">
+          <i class="fa-solid fa-triangle-exclamation text-[#1DB954]"></i> 4. Uso Aceitável e Restrições
+        </h2>
+        <p>O usuário se compromete a:</p>
+        <ul class="list-disc pl-5 space-y-1 text-xs md:text-sm text-neutral-400">
+          <li>Utilizar a ferramenta de boa-fé e exclusivamente para fins pessoais e legítimos.</li>
+          <li>Não realizar requisições automáticas maliciosas, ataques de negação de serviço (DoS) ou tentativas de burlar mecanismos de limitação de taxa (rate limits).</li>
+          <li>Respeitar integralmente os <a href="https://www.spotify.com/legal/end-user-agreement/" target="_blank" rel="noopener noreferrer" class="text-[#1DB954] hover:underline">Termos de Uso do Spotify</a> e as diretrizes aplicáveis a desenvolvedores.</li>
+        </ul>
+      </section>
+
+      <section class="space-y-2">
+        <h2 class="text-base font-bold text-white flex items-center gap-2">
+          <i class="fa-solid fa-scale-balanced text-[#1DB954]"></i> 5. Isenção de Vínculo e Garantias
+        </h2>
+        <p>
+          O <strong>Playlist Manager for Spotify</strong> é um projeto independente e não é operado, afiliado, patrocinado ou endossado pelo Spotify AB. O serviço é disponibilizado <em>"no estado em que se encontra" (as-is)</em> e <em>"conforme disponível"</em>, sem garantias de operação ininterrupta. A disponibilidade do serviço está sujeita à operação e aos limites da Spotify Web API.
+        </p>
+      </section>
+
+      <section class="space-y-2">
+        <h2 class="text-base font-bold text-white flex items-center gap-2">
+          <i class="fa-solid fa-door-open text-[#1DB954]"></i> 6. Encerramento e Revogação
+        </h2>
+        <p>
+          Você pode cessar a utilização a qualquer instante. Para revogar os privilégios concedidos a este aplicativo, acesse as configurações da sua conta em <a href="https://www.spotify.com/account/apps/" target="_blank" rel="noopener noreferrer" class="text-[#1DB954] hover:underline">spotify.com/account/apps</a> ou utilize a funcionalidade <em>"Excluir Dados"</em> no menu do app.
+        </p>
+      </section>
+
+    </div>
+
+    <!-- FOOTER -->
+    <div class="border-t border-[#282828] pt-6 flex flex-wrap items-center justify-between text-xs text-neutral-500 gap-2">
+      <span>Última atualização: Outubro de 2026</span>
+      <div class="flex items-center gap-4">
+        <a href="/privacy" class="hover:text-neutral-300 underline">Política de Privacidade</a>
+        <a href="/login-page" class="text-[#1DB954] hover:underline font-semibold">Ir para o Login</a>
+      </div>
+    </div>
+
+  </div>
+</body>
+</html>

@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Playlist Manager for Spotify · Política de Privacidade</title>
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    body { background-color: #121212; color: #fff; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; }
+  </style>
+</head>
+<body class="min-h-screen py-10 px-4 flex flex-col justify-between">
+  <div class="max-w-3xl mx-auto w-full bg-[#181818] border border-[#282828] rounded-2xl p-6 md:p-10 shadow-2xl space-y-8">
+    
+    <!-- HEADER -->
+    <div class="flex items-center justify-between border-b border-[#282828] pb-6">
+      <div class="flex items-center gap-3">
+        <div class="w-12 h-12 rounded-full bg-[#1DB954] flex items-center justify-center text-black text-2xl font-bold shadow-lg">
+          <i class="fa-brands fa-spotify"></i>
+        </div>
+        <div>
+          <h1 class="text-xl md:text-2xl font-black tracking-tight text-white">Política de Privacidade</h1>
+          <p class="text-xs text-neutral-400">Playlist Manager for Spotify · Em conformidade com LGPD (Lei 13.709/2018) e Spotify Developer Policy</p>
+        </div>
+      </div>
+      <a href="/login-page" class="text-xs bg-neutral-800 hover:bg-neutral-700 text-neutral-300 hover:text-white px-3 py-1.5 rounded-lg border border-neutral-700 transition">
+        Voltar
+      </a>
+    </div>
+
+    <!-- CONTEÚDO -->
+    <div class="space-y-6 text-sm text-neutral-300 leading-relaxed">
+      
+      <section class="space-y-2">
+        <h2 class="text-base font-bold text-white flex items-center gap-2">
+          <i class="fa-solid fa-circle-info text-[#1DB954]"></i> 1. Visão Geral e Compromisso
+        </h2>
+        <p>
+          O <strong>Playlist Manager for Spotify</strong> é uma aplicação independente desenvolvida com o objetivo exclusivo de auxiliar os usuários a organizar suas músicas curtidas e criar playlists personalizadas em sua conta no Spotify. Valorizamos profundamente a sua privacidade e adotamos o princípio da <em>minimização de dados</em> (Privacy by Design).
+        </p>
+      </section>
+
+      <section class="space-y-2">
+        <h2 class="text-base font-bold text-white flex items-center gap-2">
+          <i class="fa-solid fa-database text-[#1DB954]"></i> 2. Dados Coletados e Finalidade
+        </h2>
+        <p>A aplicação solicita autorização via OAuth 2.0 oficial do Spotify apenas para os seguintes dados estritamente necessários:</p>
+        <ul class="list-disc pl-5 space-y-1 text-xs md:text-sm text-neutral-400">
+          <li><strong>Perfil Básico (Nome de Exibição e Foto de Perfil):</strong> Usados exclusivamente para identificar a sessão ativa na interface do usuário.</li>
+          <li><strong>Músicas Curtidas (<code class="bg-[#121212] px-1.5 py-0.5 rounded text-emerald-300">user-library-read</code>):</strong> Metadados de faixas (título, artista, álbum, ano de lançamento e popularidade) para permitir a filtragem inteligente.</li>
+          <li><strong>Criação de Playlists (<code class="bg-[#121212] px-1.5 py-0.5 rounded text-emerald-300">playlist-modify-public</code>, <code class="bg-[#121212] px-1.5 py-0.5 rounded text-emerald-300">playlist-modify-private</code>):</strong> Utilizados unicamente quando você aciona o botão de criar uma nova playlist com as músicas selecionadas.</li>
+        </ul>
+        <p class="text-xs text-neutral-400">
+          <strong>O que NÃO coletamos:</strong> Nunca temos acesso à sua senha do Spotify, dados de cartão de crédito, e-mail pessoal ou endereço físico.
+        </p>
+      </section>
+
+      <section class="space-y-2">
+        <h2 class="text-base font-bold text-white flex items-center gap-2">
+          <i class="fa-solid fa-lock text-[#1DB954]"></i> 3. Armazenamento e Criptografia em Repouso
+        </h2>
+        <p>
+          Seguimos padrões rigorosos de segurança técnica (OWASP ASVS):
+        </p>
+        <ul class="list-disc pl-5 space-y-1 text-xs md:text-sm text-neutral-400">
+          <li><strong>Criptografia em Repouso:</strong> Todos os tokens de acesso temporários e os caches de faixas são cifrados com criptografia simétrica de alta segurança (<code class="bg-[#121212] px-1 py-0.5 rounded">Fernet / AES-128-CBC + HMAC-SHA256</code>) antes de serem gravados na sessão.</li>
+          <li><strong>Arquitetura BFF (Backend-For-Frontend):</strong> Seus tokens do Spotify residem apenas no servidor e nunca são transmitidos em código JavaScript para o seu navegador.</li>
+          <li><strong>Ciclo de Vida Curto:</strong> As sessões e os caches expiram automaticamente em no máximo <strong>24 horas</strong>.</li>
+        </ul>
+      </section>
+
+      <section class="space-y-2">
+        <h2 class="text-base font-bold text-white flex items-center gap-2">
+          <i class="fa-solid fa-shield-halved text-[#1DB954]"></i> 4. Seus Direitos (LGPD Art. 18 & GDPR)
+        </h2>
+        <p>Você tem total controle sobre seus dados pessoais:</p>
+        <ul class="list-disc pl-5 space-y-1 text-xs md:text-sm text-neutral-400">
+          <li><strong>Exclusão Imediata (Direito de Eliminação):</strong> A qualquer momento, através do botão <em>"Excluir Dados"</em> no menu superior da aplicação, todos os seus dados de sessão e arquivos de cache são permanentemente destruídos do servidor.</li>
+          <li><strong>Revogação de Autorização:</strong> Você pode revogar as permissões deste aplicativo diretamente nas configurações oficiais da sua conta Spotify em:
+            <a href="https://www.spotify.com/account/apps/" target="_blank" rel="noopener noreferrer" class="text-[#1DB954] hover:underline font-medium">spotify.com/account/apps</a>.
+          </li>
+        </ul>
+      </section>
+
+      <section class="space-y-2">
+        <h2 class="text-base font-bold text-white flex items-center gap-2">
+          <i class="fa-solid fa-share-nodes text-[#1DB954]"></i> 5. Não Compartilhamento com Terceiros
+        </h2>
+        <p>
+          Não vendemos, não alugamos, não repassamos nem monetizamos seus dados pessoais sob nenhuma circunstância. Nenhuma informação é compartilhada com provedores de análise comportamental ou redes de publicidade.
+        </p>
+      </section>
+
+      <section class="space-y-2">
+        <h2 class="text-base font-bold text-white flex items-center gap-2">
+          <i class="fa-solid fa-envelope text-[#1DB954]"></i> 6. Contato e Responsável
+        </h2>
+        <p>
+          Em caso de dúvidas sobre o tratamento de dados desta aplicação, entre em contato através do repositório oficial do projeto ou com o desenvolvedor responsável.
+        </p>
+      </section>
+
+    </div>
+
+    <!-- FOOTER -->
+    <div class="border-t border-[#282828] pt-6 flex flex-wrap items-center justify-between text-xs text-neutral-500 gap-2">
+      <span>Última atualização: Outubro de 2026</span>
+      <div class="flex items-center gap-4">
+        <a href="/terms" class="hover:text-neutral-300 underline">Termos de Uso</a>
+        <a href="/login-page" class="text-[#1DB954] hover:underline font-semibold">Ir para o Login</a>
+      </div>
+    </div>
+
+  </div>
+</body>
+</html>

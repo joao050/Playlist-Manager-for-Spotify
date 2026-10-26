@@ -1,0 +1,49 @@
+name: CI & Security Audit
+
+on:
+  push:
+    branches: [ main, master ]
+  pull_request:
+    branches: [ main, master ]
+  schedule:
+    - cron: '0 6 * * 1' # Executa toda segunda-feira às 06:00 UTC
+
+jobs:
+  audit-and-test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+          cache: 'pip'
+
+      - name: Install Dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+          pip install pip-audit
+
+      - name: Run pip-audit (Vulnerability Scan)
+        run: |
+          python -m pip_audit -r requirements.txt
+
+      - name: Run Security & Compliance Tests
+        env:
+          FLASK_SECRET_KEY: "0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef"
+          SPOTIPY_CLIENT_ID: "mock_client_id_for_testing_purposes"
+          SPOTIPY_CLIENT_SECRET: "mock_client_secret_for_testing_purposes"
+          SPOTIPY_REDIRECT_URI: "http://127.0.0.1:5000/callback"
+          ENCRYPTION_KEY: "ZkFBQUFBQm15ZkJxS25wMHh5UFRyMVRrZExhNkN5TmhMdz0="
+          FLASK_ENV: "development"
+        run: |
+          python -m pytest
+          python test_phase3.py
+          python test_phase4.py
+          python test_phase5.py
+          python test_phase6.py
+          python test_phase7.py
+          python test_phase8.py

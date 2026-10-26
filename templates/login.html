@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Playlist Manager for Spotify · Login</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    body { background-color: #121212; color: #fff; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; }
+  </style>
+</head>
+<body class="min-h-screen flex items-center justify-center px-4">
+  <div class="max-w-sm w-full space-y-8 text-center">
+
+    <!-- Logo e Título -->
+    <div>
+      <div class="w-20 h-20 rounded-full bg-[#1DB954] flex items-center justify-center text-black text-4xl mx-auto shadow-lg shadow-green-900/40">
+        <i class="fa-brands fa-spotify"></i>
+      </div>
+      <h1 class="mt-6 text-3xl font-black tracking-tight">Playlist Manager</h1>
+      <p class="mt-2 text-neutral-400 text-sm">Organize suas Músicas Curtidas do Spotify em segundos</p>
+    </div>
+
+    <!-- Recursos -->
+    <div class="bg-[#181818] border border-[#282828] rounded-2xl p-5 text-left space-y-3 text-sm">
+      <div class="flex items-center gap-3 text-neutral-300">
+        <i class="fa-solid fa-filter text-[#1DB954] w-5 text-center"></i>
+        <span>Filtre por <strong>artista, década, popularidade</strong> e mais</span>
+      </div>
+      <div class="flex items-center gap-3 text-neutral-300">
+        <i class="fa-solid fa-list-music text-[#1DB954] w-5 text-center"></i>
+        <span>Crie playlists diretamente na sua conta Spotify</span>
+      </div>
+      <div class="flex items-center gap-3 text-neutral-300">
+        <i class="fa-solid fa-mobile-screen text-[#1DB954] w-5 text-center"></i>
+        <span>Funciona no <strong>computador e celular</strong></span>
+      </div>
+      <div class="flex items-center gap-3 text-neutral-300">
+        <i class="fa-solid fa-shield-halved text-[#1DB954] w-5 text-center"></i>
+        <span>Login seguro via <strong>OAuth 2.0 oficial</strong> do Spotify</span>
+      </div>
+    </div>
+
+    <!-- Mensagens de Alerta / Erro -->
+    {% if error == 'access_denied' %}
+    <div class="bg-amber-950/80 border border-amber-800 text-amber-300 rounded-xl p-3 text-xs text-left flex items-start gap-2">
+      <i class="fa-solid fa-triangle-exclamation mt-0.5 text-amber-400"></i>
+      <span>Você cancelou a autorização no Spotify. Para organizar suas playlists, autorize o aplicativo.</span>
+    </div>
+    {% elif error == 'auth_failed' %}
+    <div class="bg-red-950/80 border border-red-800 text-red-400 rounded-xl p-3 text-xs text-left flex items-start gap-2">
+      <i class="fa-solid fa-circle-exclamation mt-0.5"></i>
+      <span>Falha na comunicação ou autenticação com o Spotify. Por favor, tente novamente.</span>
+    </div>
+    {% elif error %}
+    <div class="bg-red-950/80 border border-red-800 text-red-400 rounded-xl p-3 text-xs text-left flex items-start gap-2">
+      <i class="fa-solid fa-triangle-exclamation mt-0.5"></i>
+      <span>Ocorreu um erro no login. Por favor, tente novamente.</span>
+    </div>
+    {% endif %}
+
+    {% if request.args.get('deleted') %}
+    <div class="bg-emerald-950/80 border border-emerald-800 text-emerald-300 rounded-xl p-3 text-xs text-left space-y-1.5">
+      <div class="flex items-center gap-2 text-emerald-400 font-semibold">
+        <i class="fa-solid fa-check-double"></i> Dados excluídos com sucesso (LGPD Art. 18).
+      </div>
+      <p class="text-[11px] text-neutral-300 leading-relaxed">
+        Todos os seus tokens e dados de sessão foram permanentemente destruídos em nossos servidores.
+        Para revogar o acesso deste app no Spotify, acesse
+        <a href="https://www.spotify.com/account/apps/" target="_blank" rel="noopener noreferrer" class="text-[#1DB954] hover:underline font-medium">spotify.com/account/apps</a>.
+      </p>
+    </div>
+    {% endif %}
+
+    {% if request.args.get('logged_out') %}
+    <div class="bg-neutral-900 border border-neutral-700 text-neutral-300 rounded-xl p-3 text-xs text-left space-y-1.5">
+      <div class="flex items-center gap-2 text-emerald-400 font-semibold">
+        <i class="fa-solid fa-check"></i> Sessão encerrada com sucesso.
+      </div>
+      <p class="text-[11px] text-neutral-400 leading-relaxed">
+        Seus dados de sessão foram expurgados. Caso deseje revogar permanentemente as permissões da sua conta Spotify, visite:
+        <a href="https://www.spotify.com/account/apps/" target="_blank" rel="noopener noreferrer" class="text-[#1DB954] hover:underline font-medium">spotify.com/account/apps</a>.
+      </p>
+    </div>
+    {% endif %}
+
+    <!-- Botão de Login -->
+    <a href="/login" class="block w-full bg-[#1DB954] hover:bg-[#1ed760] text-black font-bold text-base py-4 rounded-full transition shadow-lg shadow-green-900/30 flex items-center justify-center gap-3">
+      <i class="fa-brands fa-spotify text-2xl"></i>
+      Entrar com Spotify
+    </a>
+
+    <!-- Transparência de Escopos & LGPD -->
+    <div class="bg-neutral-900/80 border border-neutral-800 rounded-xl p-3.5 text-left text-xs space-y-2">
+      <div class="text-neutral-300 font-semibold flex items-center gap-2">
+        <i class="fa-solid fa-user-shield text-[#1DB954]"></i> Transparência e Permissões
+      </div>
+      <p class="text-[11px] text-neutral-400 leading-relaxed">
+        O login é processado 100% nos servidores oficiais do Spotify via <strong>OAuth 2.0 com PKCE</strong>. Nós nunca temos acesso à sua senha.
+      </p>
+      <div class="space-y-1 text-[11px] text-neutral-400 border-t border-neutral-800/80 pt-2">
+        <div class="flex items-start gap-1.5">
+          <i class="fa-solid fa-check text-emerald-400 mt-0.5 text-[10px]"></i>
+          <span><strong class="text-neutral-300">Músicas curtidas:</strong> apenas para visualização e filtros analíticos.</span>
+        </div>
+        <div class="flex items-start gap-1.5">
+          <i class="fa-solid fa-check text-emerald-400 mt-0.5 text-[10px]"></i>
+          <span><strong class="text-neutral-300">Criar playlists:</strong> apenas quando você solicitar a exportação.</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Links Institucionais (LGPD & Termos) -->
+    <div class="pt-2 border-t border-neutral-800 text-[11px] text-neutral-500 flex items-center justify-center gap-4">
+      <a href="/privacy" class="hover:text-neutral-300 underline transition">Política de Privacidade</a>
+      <span>•</span>
+      <a href="/terms" class="hover:text-neutral-300 underline transition">Termos de Uso</a>
+    </div>
+
+    <p class="text-[10px] text-neutral-600 leading-relaxed px-2">
+      Você pode revogar permissões a qualquer momento em <em>spotify.com/account/apps</em> ou solicitar exclusão definitiva pelo botão do aplicativo.
+    </p>
+  </div>
+</body>
+</html>

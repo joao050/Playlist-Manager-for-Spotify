@@ -1,0 +1,57 @@
+# ==============================================================================
+# .gitignore — Playlist Manager for Spotify
+# ==============================================================================
+
+# 1. Credenciais, Chaves e Variáveis de Ambiente (NUNCA SUBIR AO REPOSITÓRIO)
+.env
+.env.*
+!.env.example
+
+# 2. Sessões em Disco e Caches Temporários
+.cache
+.flask_session/
+flask_session/
+test_flask_session_dir/
+*.tmp
+
+# 3. Dumps e Dados Locais
+liked_songs.json
+liked_songs.csv
+*.sqlite3
+
+# 4. Cache Python e Bytecode
+__pycache__/
+*.py[cod]
+*$py.class
+*.pyc
+*.pyo
+
+# 5. Ambientes Virtuais
+venv/
+.venv/
+env/
+ENV/
+env.bak/
+venv.bak/
+
+# 6. Testes e Cobertura
+.pytest_cache/
+.coverage
+.coverage.*
+htmlcov/
+.hypothesis/
+
+# 7. IDEs, Editores e Sistema Operacional
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+Thumbs.db
+ehthumbs.db
+
+# 8. Diretrizes e Metadados de IA / Assistentes
+.agent/
+GEMINI.md
+.gemini/
