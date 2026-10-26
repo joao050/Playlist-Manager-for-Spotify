@@ -27,6 +27,7 @@
 - [x] `#INT-01` | 2026-10-23 | Integração desacoplada com micro-servidor de testes Samsung Galaxy J6 (Termux/ADB) para homologação do BFF em ambiente físico | `PROJECT_MAP.md`, `PROJECT_TASKS.md`
 - [x] `#BRAND-01` | 2026-10-26 | Adequação de marca para "Playlist Manager for Spotify" em conformidade com as Spotify Developer Branding Guidelines antes da publicação no GitHub | `templates/`, `static/js/app.js`, `app.py`, `render.yaml`, `.env.example`, `docs`
 - [x] `#CI-01` | 2026-10-26 | Correção de variáveis de teste no CI/CD e conftest: chave Fernet válida (32 bytes url-safe), injeção padrão de envs de teste no conftest e remoção de scripts legados do workflow | `tests/conftest.py`, `.github/workflows/audit.yml`, `README.md`
+- [x] `#DEP-01` | 2026-10-26 | Atualização de dependências auditadas pelo Dependabot: gunicorn para 26.2.0, actions/checkout para v7 e actions/setup-python para v7 | `requirements.txt`, `.github/workflows/audit.yml`
 
 
 ## 5. Decisões Tomadas
@@ -44,3 +45,4 @@
 - Suíte Integrada com Pytest como Portão de Qualidade: Testes automatizados estruturados em classes temáticas desacopladas com fixtures independentes, reset automático do rate limiter e execução no CI/CD a cada push e pull request.
 - Conformidade Estrita com Diretrizes de Marca do Spotify: Adoção do padrão oficial "[Nome do App] for Spotify" ("Playlist Manager for Spotify"), garantindo que o app não aparente ser um produto oficial operado pelo Spotify AB.
 - Isolamento e Resiliência de Testes no CI: `conftest.py` define programaticamente fallbacks de credenciais e chaves Fernet válidas para testes, impedindo que runners limpos (sem `.env` local) falhem no fail-fast do `app.py`.
+- Atualização e Alinhamento Proativo com Dependabot: Adoção do Gunicorn 26.2.0 (melhorias em HTTP/2 e gthread) e actions oficiais v7 (prevenção contra ataques pwn em checkout e runtime Node moderno em setup-python).
