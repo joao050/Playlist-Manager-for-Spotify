@@ -1,15 +1,86 @@
 # PROJECT_TASKS.md — Registro Vivo de Tarefas
 
 ## 1. Fase Atual
-- **Fase:** Conclusão Integral do Ciclo de Endurecimento de Segurança (Fases 0 a 9 — 100% Finalizadas).
-- **Objetivo:** Todas as fases planejadas (Fail-fast, PKCE, Criptografia/LGPD, Proteção de APIs, CSP/Anti-XSS, Conformidade Spotify, Deploy/Infraestrutura, Threat Model STRIDE e Suíte Integrada com Pytest) foram concluídas com 100% de aprovação e documentadas.
+- **Fase:** Expansão Colaborativa & Novas Funcionalidades (Fase 10).
+- **Objetivo:** Permitir que múltiplos desenvolvedores colaborem de forma assíncrona e desacoplada em novas funcionalidades de produto, utilizando Gitflow simplificado (`feature/*` -> `develop` -> `main`) e o Google Antigravity.
 
 ## 2. Em Andamento
-- **Tarefa:** Nenhuma (Ciclo concluído).
-- **Status:** Estável e pronto para auditoria externa ou homologação final.
+- *Nenhuma tarefa em execução no momento.* As tarefas listadas no backlog abaixo estão livres para qualquer colaborador assumir.
 
-## 3. Planejadas (Backlog)
-- *Nenhuma tarefa pendente no momento.* Todas as 9 fases foram executadas com sucesso.
+## 3. Planejadas (Backlog de Funcionalidades para Colaboradores)
+
+> 💡 **Como colaborar:** Escolha uma tarefa disponível abaixo, crie uma branch `feature/<nome-da-tarefa>` a partir da `develop`, leia o arquivo `CONTRIBUTING.md` e, ao finalizar com os testes do `pytest` passando, abra um Pull Request para a branch `develop`.
+
+---
+
+### 🔹 `#FEAT-01` — Aprimoramento e Expansão dos Filtros de Busca
+- **Status:** `[Disponível para Colaboração]`
+- **Áreas Relacionadas:** `static/js/app.js`, `templates/index.html`, `app.py`
+- **Descrição & Contexto:**  
+  Atualmente, o filtro permite buscar por artista, década e popularidade. O objetivo desta tarefa é dar maior flexibilidade para o usuário encontrar músicas na biblioteca de curtidas.
+- **Sugestões e Liberdade Criativa do Colaborador:**
+  - Campo de busca textual rápida (filtro instantâneo por título da faixa, artista ou álbum).
+  - Filtro por ano exato ou intervalo de anos (slider ou seletor).
+  - Filtro por duração da faixa (ex: músicas curtas < 3min, épicas > 5min).
+  - Ordenação dinâmica das colunas da tabela (ordenar por popularidade ascendente/descendente, mais recentes primeiro, etc.).
+- **Critérios de Aceite:**
+  - [ ] Renderização e filtros utilizando a DOM API segura (sem `innerHTML` com texto não sanitizado).
+  - [ ] Funcionamento fluido no desktop e no mobile.
+  - [ ] Suíte `pytest` passando com 100% de sucesso.
+
+---
+
+### 🔹 `#FEAT-02` — Gestão e Modificação de Playlists Existentes & Colaborativas
+- **Status:** `[Disponível para Colaboração]`
+- **Áreas Relacionadas:** `app.py`, `templates/index.html`, `static/js/app.js`
+- **Descrição & Contexto:**  
+  Hoje, a aplicação cria apenas *novas* playlists. Os usuários devem ser capazes de gerenciar e atualizar playlists existentes em suas contas, incluindo playlists colaborativas compartilhadas entre amigos (onde o usuário tem permissão de escrita).
+- **Sugestões e Liberdade Criativa do Colaborador:**
+  - Adicionar novo endpoint backend seguro (ex: `GET /api/user_playlists`) que lista as playlists do usuário (com paginação e indicando se é própria ou colaborativa).
+  - No modal de criação/exportação, permitir ao usuário escolher entre:
+    1. *Criar uma nova playlist*, OU
+    2. *Adicionar as músicas selecionadas a uma playlist existente*.
+  - Garantir o uso dos endpoints modernos da Spotify Web API (`POST /v1/playlists/{id}/items`) com chunking de 100 em 100 itens.
+- **Critérios de Aceite:**
+  - [ ] Verificação e inclusão do escopo `playlist-read-collaborative` no fluxo OAuth caso necessário (com transparência na tela de login).
+  - [ ] Proteção CSRF obrigatória via `@require_same_origin` em rotas POST.
+  - [ ] Suíte `pytest` passando com 100% de sucesso.
+
+---
+
+### 🔹 `#FEAT-03` — Prévia de Áudio das Músicas (Audio Preview Player)
+- **Status:** `[Disponível para Colaboração]`
+- **Áreas Relacionadas:** `app.py`, `static/js/app.js`, `templates/index.html`
+- **Descrição & Contexto:**  
+  Permitir que o usuário escute uma prévia de 30 segundos da faixa diretamente na tabela de músicas antes de decidir incluí-la na playlist.
+- **Sugestões e Liberdade Criativa do Colaborador:**
+  - No backend (`app.py`), verificar a inclusão do campo `preview_url` (disponibilizado pela API do Spotify para faixas que possuem preview aberto) na minimização de dados das faixas.
+  - No frontend, adicionar um botão de "Play/Pause" discreto ao lado do nome da música ou da capa do álbum.
+  - Garantir que apenas uma prévia toque por vez (pausar a anterior ao iniciar uma nova).
+  - Tratamento elegante para faixas que não possuam `preview_url` (ex: botão desabilitado com tooltip amigável).
+- **Critérios de Aceite:**
+  - [ ] Ajustar a CSP (`Content-Security-Policy`) no `app.py` se necessário para permitir origens de áudio do Spotify (`media-src 'self' https://*.spotifycdn.com https://*.p.scdn.co`).
+  - [ ] Implementação de player HTML5 nativo sem dependências externas pesadas.
+  - [ ] Suíte `pytest` passando com 100% de sucesso.
+
+---
+
+### 🔹 `#FEAT-04` — Refinamento de Design, Microinterações e UX (Web & Mobile)
+- **Status:** `[Disponível para Colaboração]`
+- **Áreas Relacionadas:** `templates/index.html`, `templates/login.html`, `static/js/app.js`
+- **Descrição & Contexto:**  
+  A interface atual é limpa e funcional, mas detalhes de usabilidade, feedbacks de carregamento (skeletons/shimmers), animações suaves e pequenos toques criativos elevarão a percepção de qualidade do aplicativo.
+- **Sugestões e Liberdade Criativa do Colaborador:**
+  - Estados visuais de carregamento mais modernos (esqueletos de carregamento na tabela enquanto carrega a biblioteca).
+  - Melhorias no visual de cards e tabelas no mobile (estilo "bottom sheet" para filtros ou ações em telas pequenas).
+  - Feedback tátil/visual imediato ao selecionar e desmarcar músicas (contador animado, seleção rápida de todas as faixas visíveis).
+  - Dark mode refinado com contraste otimizado (Tailwind CSS).
+- **Critérios de Aceite:**
+  - [ ] Preservação estrita das diretrizes de marca do Spotify (verde `#1DB954`, logo oficial sem distorções, fontes legíveis).
+  - [ ] Zero quebra de layout em telas de celular (testado em larguras 360px a 414px).
+  - [ ] Suíte `pytest` passando com 100% de sucesso.
+
+---
 
 ## 4. Concluídas
 - [x] `#SEC-00` | 2026-10-19 | Diagnóstico inicial e testes de base sem edição | `app.py`, `templates/`
@@ -31,6 +102,7 @@
 - [x] `#DEP-02` | 2026-10-26 | Guia de provisionamento e deploy em produção no Render via Blueprint com render.yaml e sincronização de credenciais | `render.yaml`, `Procfile`, `README.md`
 - [x] `#FIX-REDIS-01` | 2026-10-26 | Resiliência defensiva de inicialização do Redis: validação de esquemas (redis://, rediss://, unix://), fallback seguro para filesystem e remoção de REDIS_URL obrigatório do render.yaml | `app.py`, `render.yaml`
 - [x] `#FIX-REDIS-02` | 2026-10-26 | Definição global de REDIS_URL para consumo consistente pelo Flask-Limiter e Session, eliminando NameError no Gunicorn | `app.py`
+- [x] `#COLAB-01` | 2026-11-02 | Estruturação de fluxo colaborativo: criação de CONTRIBUTING.md, PULL_REQUEST_TEMPLATE.md, regra .agent/rules/collaboration_workflow.md e backlog de funcionalidades #FEAT-01 a #FEAT-04 | `CONTRIBUTING.md`, `.github/`, `.agent/`, `PROJECT_TASKS.md`, `README.md`
 
 
 ## 5. Decisões Tomadas

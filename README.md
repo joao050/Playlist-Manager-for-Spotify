@@ -196,6 +196,13 @@ A aplicação segue uma abordagem formal de governança e segurança por padrão
 
 ---
 
-## 11. Licença e Conformidade
+## 11. Como Contribuir
+
+Quer implementar novas funcionalidades ou melhorar o app?
+Consulte nosso guia completo para novos desenvolvedores em [**`CONTRIBUTING.md`**](./CONTRIBUTING.md) e confira as tarefas disponíveis para colaboração no [**`PROJECT_TASKS.md`**](./PROJECT_TASKS.md).
+
+---
+
+## 12. Licença e Conformidade
 
 Este projeto é disponibilizado sob a licença MIT. O uso da API do Spotify está sujeito aos [Spotify Developer Terms of Service](https://developer.spotify.com/terms).

@@ -8,7 +8,9 @@ Aplicação web BFF (Backend-For-Frontend) em Flask que autentica usuários via 
 ## 2. Árvore Comentada
 ```text
 playlist-manager-for-spotify/
-├── .agent/rules/                # Regras automáticas do workspace para o Antigravity
+├── .agent/rules/                # Regras automáticas do workspace para o Google Antigravity
+│   ├── context_management.md    # Economia de contexto e leitura cirúrgica
+│   └── collaboration_workflow.md# Regras de branches, BFF e segurança para colaboradores
 ├── .flask_session/              # Sessões locais no disco (arquivos cifrados, NUNCA ler manualmente)
 ├── templates/
 │   ├── index.html               # UI principal: tabela de músicas, filtros, modal de criação, LGPD delete
@@ -22,7 +24,9 @@ playlist-manager-for-spotify/
 │   └── test_security.py         # Suíte integrada consolidada (Fase 9 — 32 testes de regressão de segurança)
 ├── .github/
 │   ├── workflows/audit.yml      # CI/CD: auditoria pip-audit e suíte de testes automatizados (pytest)
-│   └── dependabot.yml           # Dependabot: monitoramento semanal de segurança de dependências
+│   ├── dependabot.yml           # Dependabot: monitoramento semanal de segurança de dependências
+│   └── PULL_REQUEST_TEMPLATE.md # Template padronizado com checklist de segurança para PRs
+├── CONTRIBUTING.md              # Guia para novos colaboradores (Git básico, branches e testes)
 ├── Procfile                     # Declaração do processo WSGI Gunicorn multi-worker para produção
 ├── render.yaml                  # Especificação declarativa de infraestrutura (Render Blueprint)
 ├── pytest.ini                   # Configuração declarativa do pytest
