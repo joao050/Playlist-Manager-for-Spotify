@@ -103,6 +103,7 @@
 - [x] `#FIX-REDIS-01` | 2026-10-26 | Resiliência defensiva de inicialização do Redis: validação de esquemas (redis://, rediss://, unix://), fallback seguro para filesystem e remoção de REDIS_URL obrigatório do render.yaml | `app.py`, `render.yaml`
 - [x] `#FIX-REDIS-02` | 2026-10-26 | Definição global de REDIS_URL para consumo consistente pelo Flask-Limiter e Session, eliminando NameError no Gunicorn | `app.py`
 - [x] `#COLAB-01` | 2026-11-02 | Estruturação de fluxo colaborativo: criação de CONTRIBUTING.md, PULL_REQUEST_TEMPLATE.md, regra .agent/rules/collaboration_workflow.md e backlog de funcionalidades #FEAT-01 a #FEAT-04 | `CONTRIBUTING.md`, `.github/`, `.agent/`, `PROJECT_TASKS.md`, `README.md`
+- [x] `#CI-02` | 2026-11-02 | Configuração de target-branch develop no Dependabot para direcionamento correto de PRs automáticos de dependências e actions | `.github/dependabot.yml`
 
 
 ## 5. Decisões Tomadas
@@ -122,3 +123,4 @@
 - Isolamento e Resiliência de Testes no CI: `conftest.py` define programaticamente fallbacks de credenciais e chaves Fernet válidas para testes, impedindo que runners limpos (sem `.env` local) falhem no fail-fast do `app.py`.
 - Atualização e Alinhamento Proativo com Dependabot: Adoção do Gunicorn 26.2.0 (melhorias em HTTP/2 e gthread) e actions oficiais v7 (prevenção contra ataques pwn em checkout e runtime Node moderno em setup-python).
 - Fallback Automático e Opcionalidade do Redis: Se a variável `REDIS_URL` estiver vazia, indefinida ou com formato inválido, a aplicação recorre automaticamente ao armazenamento de sessões em sistema de arquivos local (`.flask_session/`), eliminando travamentos de deploy.
+- Dependabot direcionado para branch develop: Configuração explícita de `target-branch: "develop"` no `dependabot.yml` para pip e github-actions, garantindo que PRs automáticos cumpram o Gitflow sem apontar para a branch main.
