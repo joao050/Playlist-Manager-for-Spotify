@@ -206,3 +206,9 @@ Consulte nosso guia completo para novos desenvolvedores em [**`CONTRIBUTING.md`*
 ## 12. Licença e Conformidade
 
 Este projeto é disponibilizado sob a licença MIT. O uso da API do Spotify está sujeito aos [Spotify Developer Terms of Service](https://developer.spotify.com/terms).
+
+---
+
+## 13. Utilização de IA no Projeto
+
+Que fique claro que foi utilizado IA no desenvolvimento do projeto. Utilizei principalmente o ambiente integrado do Google Antigravity para escrever as linhas de código, revisão e documentação. Claro, estive ciente de todo o processo de desenvolvimento e aplicação, li revisei e testei tudo ao meu alcance tudo COM MINHA ORIENTAÇÃO desde funcionalidade e questões de segurança.
